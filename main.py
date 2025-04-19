@@ -1,16 +1,37 @@
-# This is a sample Python script.
+# Reuse the board and functions from previous milestones
+board = [' ' for _ in range(9)]
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+def display_board():
+    print()
+    print(f" {board[0]} | {board[1]} | {board[2]} ")
+    print("---+---+---")
+    print(f" {board[3]} | {board[4]} | {board[5]} ")
+    print("---+---+---")
+    print(f" {board[6]} | {board[7]} | {board[8]} ")
+    print()
 
+def player_move(player_symbol):
+    while True:
+        try:
+            move = int(input(f"Enter your move (1-9) for '{player_symbol}': ")) - 1
+            if move < 0 or move > 8:
+                print("Invalid input. Choose a number from 1 to 9.")
+            elif board[move] != ' ':
+                print("That spot is already taken. Choose another.")
+            else:
+                board[move] = player_symbol
+                break
+        except ValueError:
+            print("Please enter a valid number.")
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# Alternating turns between two players
+def play_game():
+    current_player = 'X'
+    for turn in range(9):  # Max 9 moves
+        display_board()
+        player_move(current_player)
+        current_player = 'O' if current_player == 'X' else 'X'
+    display_board()
 
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+# Start the game
+play_game()
