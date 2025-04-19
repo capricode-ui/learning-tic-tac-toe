@@ -24,12 +24,26 @@ def player_move(player_symbol):
         except ValueError:
             print("Please enter a valid number.")
 
-# Alternating turns between two players
+def check_win(symbol):
+    win_conditions = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8],  # rows
+        [0, 3, 6], [1, 4, 7], [2, 5, 8],  # columns
+        [0, 4, 8], [2, 4, 6]              # diagonals
+    ]
+    for condition in win_conditions:
+        if all(board[i] == symbol for i in condition):
+            return True
+    return False
+
 def play_game():
     current_player = 'X'
-    for turn in range(9):  # Max 9 moves
+    for turn in range(9):
         display_board()
         player_move(current_player)
+        if check_win(current_player):
+            display_board()
+            print(f"Player '{current_player}' wins!")
+            return
         current_player = 'O' if current_player == 'X' else 'X'
     display_board()
 
