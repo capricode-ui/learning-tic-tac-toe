@@ -36,6 +36,7 @@ def check_win(symbol):
     return False
 
 def play_game():
+    #sample comment
     current_player = 'X'
     for turn in range(9):
         display_board()
@@ -49,3 +50,4 @@ def play_game():
 
 # Start the game
 play_game()
+#this is a sample comment just for checking
